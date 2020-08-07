@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { View, Image, Text } from 'react-native';
 // botao sem fundo com efeitinho bonitinho
 import { BorderlessButton } from 'react-native-gesture-handler'
@@ -12,9 +12,11 @@ import styles from './styles';
 // propriedades que recebe por ser dinâmico
 interface PageHeaderProps {
     title: string;
+    // receber um componente como propriedade
+    headerRight?: ReactNode;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ title }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ title, headerRight, children }) => {
     // forçando a navegação para a pagina inicial
     const { navigate } = useNavigation();
 
@@ -33,7 +35,12 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title }) => {
 
             </View>
 
-            <Text style={styles.title}>{title}</Text>
+            <View style={styles.header}>
+                <Text style={styles.title}>{title}</Text>
+                {headerRight}
+            </View>
+
+            {children}
         </View>
     )
 }

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // View => página em branco
 // Image => imagens do react-native
 // TouchableOpacity => botão
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Text } from 'react-native';
 // importação para as navegações
 import { useNavigation } from '@react-navigation/native';
 // botão retangular desta biblioteca que adapta o efeito do clique de acordo com o celular
@@ -15,9 +15,21 @@ import landingImg from '../../assets/images/landing.png';
 import studyIcon from '../../assets/images/icons/study.png'
 import giveClassesIcon from '../../assets/images/icons/give-classes.png'
 import heartIcon from '../../assets/images/icons/heart.png'
+import api from '../../services/api';
 
 function Landing() {
     const { navigate } = useNavigation();
+
+    // conectando o tanto de conexões com a api
+    const [totalConnections, setTotalConnections] = useState(0);
+
+    useEffect(() => {
+        api.get('connections').then(response => {
+            const { total } = response.data;
+
+            setTotalConnections(total);
+        });
+    }, []);
 
     // função que retorna para onde vai ser navegado usando o navigate
     function handleNavigateToGiveClassesPage() {
@@ -39,7 +51,7 @@ function Landing() {
             </Text>
 
             <View style={styles.buttonsContainer}>
-                <RectButton 
+                <RectButton
                     onPress={handleNavigateToStudyPages}
                     style={[styles.button, styles.buttonPrimary]}
                 >
@@ -48,7 +60,7 @@ function Landing() {
                     <Text style={styles.buttonText}>Estudar</Text>
                 </RectButton>
 
-                <RectButton 
+                <RectButton
                     onPress={handleNavigateToGiveClassesPage}
                     style={[styles.button, styles.buttonSecondary]}
                 >
@@ -60,7 +72,7 @@ function Landing() {
             </View>
 
             <Text style={styles.totalConnections}>
-                Total de 285 conexões já realizadas {' '}
+                Total de {totalConnections} conexões já realizadas {' '}
                 <Image source={heartIcon} />
             </Text>
 
