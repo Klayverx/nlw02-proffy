@@ -103,7 +103,6 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher, favorited }) => {
                             isFavorited ? styles.favorited : {},
                         ]}
                     >
-                        {/* se estiver favoritado, coloca o primeiro, se não tiver, coloca o segundo */}
                         {isFavorited
                             ? <Image source={unFavoriteIcon} />
                             : <Image source={heartOutlineIcon} />
