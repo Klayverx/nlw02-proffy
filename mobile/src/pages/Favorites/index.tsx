@@ -5,8 +5,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 // para a pagina de tabs carregar automagicamente. toda vez que a tela entrar em foco
 import { useFocusEffect } from '@react-navigation/native';
 
-import TeacherItem, { Teacher } from '../../components/TeacherItem';
-import PageHeader from '../../components/PageHeader';
+import TeacherItem, { Teacher } from '../../Components/TeacherItem';
+import PageHeader from '../../Components/PageHeader';
 
 import styles from './styles';
 
